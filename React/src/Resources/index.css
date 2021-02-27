@@ -1,0 +1,70 @@
+body {
+  font-family: sans-serif;
+}
+
+.login {
+  margin: 9.5% 25%;
+  padding: 2.5% 2.5%;
+}
+
+.cust-container {
+  margin-left: 15%;
+  margin-right: 15%;
+  padding-left: 15%;
+  padding-right: 15%;
+}
+
+.Content {
+  background-color: darkblack;
+  font-size: 16px;
+  font-family: cursive;
+  height: 35rem;
+  overflow: auto;
+}
+
+.margin-top-2 {
+  margin-top: 2rem;
+}
+
+.cust-btn {
+  width: 75%;
+  background: black;
+  font-weight: bold;
+}
+.cust-btn-send {
+  border-radius: 5rem;
+  background: linear-gradient(to left, #33ccff 0%, #ff99cc 100%);
+}
+
+.input-field {
+  display: flex;
+  background-color: ghostwhite;
+  border-radius: 5rem;
+  border: 25px solid ghostwhite;
+}
+
+.comment {
+  background-color: rgb(174, 174, 174);
+  border-radius: 0 0 2em;
+  -webkit-user-modify: read-only;
+  word-break: break-word;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
