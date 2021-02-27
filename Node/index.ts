@@ -8,6 +8,7 @@ import multer from "multer";
 import fs from "fs";
 
 import excelToJson from "convert-excel-to-json";
+import axios from "axios";
 
 const app = express();
 const port = 4000;
@@ -16,11 +17,7 @@ const sequelize = new Sequelize("commentappdb", "root", "admin", {
   dialect: "mysql",
 });
 
-app.use(
-  cors({
-    origin: "http://localhost:3000",
-  })
-);
+app.use(cors());
 
 const upload = multer();
 
@@ -133,8 +130,6 @@ app.post("/login", (req, res) => {
 });
 
 app.post("/getjsonfromxls", upload.single("x_excel_file"), (req, res) => {
-  let resdata = {};
-
   try {
     if (
       req.file.mimetype ===
@@ -144,10 +139,36 @@ app.post("/getjsonfromxls", upload.single("x_excel_file"), (req, res) => {
 
       const json = excelToJson({
         sourceFile: "./excelfile.xlsx",
+        header: {
+          rows: 1,
+        },
       });
+
+      json.Userlist.map((el) => {
+        const data = {
+          firstname: el.A,
+          lastname: el.B,
+          email: el.C,
+          username: el.C,
+          password: el.D,
+          mobile: el.F,
+        };
+
+        axios
+          .post("//localhost:4000/addUser", data)
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      });
+
       res.send(json);
-    }
-  } catch (error) {}
+    } else res.send({ err: "Internal Error" });
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 app.listen(port, "localhost", () => {
